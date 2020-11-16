@@ -4,6 +4,7 @@ usage:
 
 # prepare
 prepare:
+	@cargo clippy --help 2>&1 > /dev/null || rustup component add clippy
 	@cargo watch --help 2>&1 > /dev/null || cargo install cargo-watch
 	@cargo audit --help 2>&1 > /dev/null || cargo install cargo-audit
 
@@ -20,7 +21,7 @@ fmt: prepare
 	@cargo fmt
 
 # lint
-lint:
+lint: prepare
 	@cargo clippy
 
 # audit
