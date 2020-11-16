@@ -1,0 +1,21 @@
+name: pixela
+
+on: push
+
+jobs:
+  increment:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup a-know/pi
+        uses: peaceiris/actions-pixela@v2
+        with:
+          pi_version: '1.2.0'
+
+      - name: Increment
+        env:
+          PIXELA_USER_TOKEN: ${{ secrets.PIXELA_USER_TOKEN }}
+        run: |
+          pi pixel increment -u m3y -g ods
+          pi pixel increment -u m3y -g learning-rust
