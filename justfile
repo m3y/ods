@@ -6,7 +6,6 @@ usage:
 prepare:
 	@cargo fmt --help 2>&1 > /dev/null || rustup component add rustfmt
 	@cargo clippy --help 2>&1 > /dev/null || rustup component add clippy
-	@cargo audit --help 2>&1 > /dev/null || cargo install cargo-audit
 
 # run
 run +TARGET:
@@ -23,10 +22,6 @@ fmt: prepare
 # lint
 lint: prepare
 	@cargo clippy
-
-# audit
-audit: lint
-	@cargo audit
 
 # test
 test: prepare
