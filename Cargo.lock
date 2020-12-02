@@ -3,3 +3,7 @@
 [[package]]
 name = "arraystack"
 version = "0.1.0"
+
+[[package]]
+name = "interface"
+version = "0.1.0"
