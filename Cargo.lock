@@ -3,6 +3,9 @@
 [[package]]
 name = "arraystack"
 version = "0.1.0"
+dependencies = [
+ "interface",
+]
 
 [[package]]
 name = "interface"
