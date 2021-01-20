@@ -50,14 +50,14 @@ impl<T: Clone> Queue<T> for Array<T> {
 
     fn remove(&mut self) -> Option<T> {
         let x: Option<T> = self.a[self.j].take();
-        self.j = self.j + 1;
+        self.j += 1;
         self.n -= 1;
 
         if self.a.len() > 3 * self.n {
             self.resize();
         }
 
-        return x;
+        x
     }
 }
 
