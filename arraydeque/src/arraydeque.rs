@@ -39,7 +39,7 @@ impl<T> Array<T> {
 
 impl<T: Clone> List<T> for Array<T> {
     fn size(&self) -> usize {
-        0
+        self.n
     }
 
     fn get(&self, i: usize) -> Option<T> {
@@ -61,13 +61,13 @@ impl<T: Clone> List<T> for Array<T> {
             } else {
                 self.j - 1
             };
-            // 左シフト
+            // left shift
             for k in 0..i {
                 self.a[(self.j + k) % self.a.len()] =
                     self.a[(self.j + k + 1) % self.a.len()].take();
             }
         } else {
-            // 右シフト
+            // right shift
             for k in (i + 1..=self.n).rev() {
                 self.a[(self.j + k) % self.a.len()] =
                     self.a[(self.j + k - 1) % self.a.len()].take();
@@ -79,28 +79,25 @@ impl<T: Clone> List<T> for Array<T> {
     }
 
     fn remove(&mut self, i: usize) {
-        if i >= self.n {
+        let _x = self.a[(self.j + i) % self.a.len()].take();
+        if i < self.n / 2 {
+            // right shift
+            for k in (1..=i).rev() {
+                self.a[(self.j + k) % self.a.len()] =
+                    self.a[(self.j + k - 1) % self.a.len()].take();
+            }
+            self.j = (self.j + 1) % self.a.len();
         } else {
-            let _x = self.a[(self.j + i) % self.a.len()].take();
-            if i < self.n / 2 {
-                // 右シフト
-                for k in (1..=i).rev() {
-                    self.a[(self.j + k) % self.a.len()] =
-                        self.a[(self.j + k - 1) % self.a.len()].take();
-                }
-                self.j = (self.j + 1) % self.a.len();
-            } else {
-                // 左シフト
-                for k in i..self.n - 1 {
-                    self.a[(self.j + k) % self.a.len()] =
-                        self.a[(self.j + k + 1) % self.a.len()].take();
-                }
+            // left shift
+            for k in i..self.n - 1 {
+                self.a[(self.j + k) % self.a.len()] =
+                    self.a[(self.j + k + 1) % self.a.len()].take();
             }
+        }
 
-            self.n -= 1;
-            if 3 * self.n < self.a.len() {
-                self.resize()
-            }
+        self.n -= 1;
+        if 3 * self.n < self.a.len() {
+            self.resize()
         }
     }
 }
@@ -225,8 +222,8 @@ mod tests {
             vec![
                 Some("b"),
                 Some("d"),
-                Some("y"),
                 Some("z"),
+                Some("y"),
                 Some("e"),
                 Some("x"),
                 Some("f"),
