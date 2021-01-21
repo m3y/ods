@@ -72,16 +72,16 @@ mod tests {
         }
     }
 
-    #[test]
-    fn it_works() {
-        let _arrayqueue: Array<&str> = Array::new();
-        assert_eq!(2 + 2, 4);
-    }
-
     fn assert_queue(queue: &Array<&str>, expected_list: Vec<Option<&str>>) {
         for (i, e) in expected_list.iter().enumerate() {
             assert_eq!(queue.get(i), *e);
         }
+    }
+
+    #[test]
+    fn it_works() {
+        let _arrayqueue: Array<&str> = Array::new();
+        assert_eq!(2 + 2, 4);
     }
 
     #[test]
