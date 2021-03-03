@@ -1,8 +1,4 @@
 [workspace]
 
-members = [
-    "interface",
-    "arraystack",
-    "arrayqueue",
-    "arraydeque",
+members = ["interface", "arraystack", "arrayqueue", "arraydeque", "linkedlist",
 ]

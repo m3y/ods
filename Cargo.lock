@@ -24,3 +24,7 @@ dependencies = [
 [[package]]
 name = "interface"
 version = "0.1.0"
+
+[[package]]
+name = "linkedlist"
+version = "0.1.0"
